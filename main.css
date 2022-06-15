@@ -1,0 +1,40 @@
+body {
+    width: 900px;
+    font-family: "Helvetica",Helvetica,Arial,sans-serif;
+    font-size:15px;
+    color: #34444a;
+    padding: 15px 15px;
+    margin: 30px auto;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  .grid-container {
+    /* background-color:whitesmoke;  */
+    overflow: hidden;
+    box-shadow: 1px 2px 5px 1px rgb(0 0 0 / 16%), 1px 2px 10px 1px rgb(0 0 0 / 12%);
+    margin: 10px 10px 10px 10px; 
+    padding-bottom: 1rem;
+    display: block;
+    min-width: 20rem;
+  }
+
+  .content {
+    padding: 3rem 3rem;
+    font-weight: 400;
+}
+
+.error { 
+    color: #FF0000;
+} 
+
+
+.form-registration-img {
+  float: right;
+  
+}
+
+
+
