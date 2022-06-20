@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anketa o zapošljivost</title>
+ <link rel="stylesheet" href="./Foundation-Sites-CSS/css/foundation.css">
+<link rel="stylesheet" href="./Foundation-Sites-CSS/css/app.css"> 
+<link rel="stylesheet" type="text/css" href="main.css">  
+ <!-- <script defer src="script.js"></script>  -->
+</head>
+
+<script src="jquery.main.js" type="text/javascript"></script>
+
+
 <?php
 
 include "dbConfig.php";
@@ -124,9 +141,12 @@ if (isset($_POST['submit'])) {
         $sql = "INSERT INTO studenti (ime, prezime, oib, mobitel, email, izvodac_naziv, studijski_program_naziv, razina, datum) VALUES ('$ime', '$prezime', '$oib', '$mobitel', '$email', '$izvodac_naziv', '$studijski_program_naziv', '$razina', '$datum')";
         $dbh->exec($sql);
 
-echo "<h1>Primili smo Vaše podatke!<br> Zahvaljujemo na suradnji.</h1>";
-echo "<h3>Primljeni podaci:</h3>";
-echo "Ime:" . ' '. $ime;
+echo '<div class="alert-success"><h3>Primili smo Vaše podatke!</h3> <p>Zahvaljujemo na suradnji.</p>';
+
+
+echo "<strong>Primljeni podaci:</strong>";
+echo "</br>";
+echo "Ime:" . ' ' .$ime;
 echo "<br>";
 echo "Prezime:" . ' ' .$prezime;
 echo "<br>";
@@ -141,9 +161,10 @@ echo "<br>";
 echo "Razina obrazovanja: " . ' ' . $razina;
 echo "<br>";
 echo "Datum završetka studija: " . ' ' . $datum;
-echo "<br>";
+echo '</div>';
 
     }
+    
 }
  }
     catch (PDOException $e) 
@@ -159,3 +180,6 @@ echo "<br>";
 
     }
   ?>
+
+</body>
+</html>

@@ -15,7 +15,7 @@
 <script src="jquery.main.js" type="text/javascript"></script>
 
 <script>
-  function formProcess(){
+ /*  function formProcess(){
   var capture = document.forms["input"]["ime"].value + '<br>';
   capture += document.forms["input"]["prezime"].value + '<br>';
   capture += document.forms["input"]["oib"].value + '<br>';
@@ -26,7 +26,7 @@
   capture += document.forms["input"]["razina"].value + '<br>';
   capture += document.forms["input"]["datum"].value + '<br>';
   capture += document.forms["input"]["izjava"].value + '<br>';
- } 
+ }  */
 
 $(document).ready(function(){
     $('#izvodac').on('change', function(){
@@ -85,162 +85,34 @@ $(document).ready(function(){
 
   <?php
 
-    try {
-      $imeErr = $prezimeErr = $oibErr = $emailErr = $mobitelErr = $izvodac_nazivErr = $studijski_program_nazivErr = $razina_nazivErr = $datumErr = $izjavaErr = "";
-      $ime = $prezime = $oib = $email = $mobitel = $izvodac_naziv = $studijski_program_naziv = $razina = $datum = $izjava = "";
-    
-      //Input fields validation
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  include "message.php";
 
-      if (isset($_POST['submit'])) {
+  function CheckOIB($oib) {
 
-      if (empty($_POST["ime"])) {
-      $imeErr = "Ime is required";
-      } else {
-        $ime = test_input($_POST["ime"]);
-      }
-      // check if name only contains letters and whitespace
-      if (!preg_match("/^[a-zA-Z-' ]*$/",$ime)) {
-          $imeErr = "Only letters and white space allowed";
-        }
-           }    
-     
-      if (empty($_POST["prezime"])) {
-       $prezimeErr =  "Prezime is required";
-     } else {
-       $prezime = test_input($_POST["prezime"]);
-     
-       // check if name only contains letters and whitespace
-     }
-     
-       if (empty($_POST["oib"])) {
-       $oibErr = "OIB is required";
-       } else {
-       $oib = test_input($_POST["oib"]);
-       // check if e-mail address is well-formed
-     
-       if (!filter_var($oib)) {
-         $oibErr = "Invalid OIB format";
-       }
-       }
-     
-       if (empty($_POST["mobitel"])) {
-       $mobitelErr = "Mobitel is required";
-     } else {
-       $mobitel = test_input($_POST["mobitel"]);
-       // check if e-mail address is well-formed
-      
-       if (!preg_match("/^[0-9]{3}\s[0-9]{3}\s[0-9]{4}+$/", $mobitel)) {
-         $mobitelErr = "Invalid mobitel format";
-       } 
-     }
-     
-       if (empty($_POST["email"])) {
-       $emailErr = "Email is required";
-     } else {
-       $email = test_input($_POST["email"]);
-       // check if e-mail address is well-formed
-     
-       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-         $emailErr = "Invalid email format";
-       }
-     }
-     
-     if (empty($_POST["izvodac_naziv"])) {
-     $izvodac_nazivErr = "Izvođač is required";
-     } else {
-     $izvodac_naziv = test_input($_POST["izvodac_naziv"]);
-     // check if e-mail address is well-formed
-     
-     } 
-     
-      if (empty($_POST["studijski_program_naziv"])) {
-     $studijski_program_nazivErr = "Studijski program is required";
-     } else {
-     $studijski_program_naziv = test_input($_POST["studijski_program_naziv"]);
-     // check if e-mail address is well-formed
-     } 
-     
-      if (empty($_POST["razina_naziv"])) {
-     $razinaErr = "Razina is required";
-     } else {
-     $razina = test_input($_POST["razina_naziv"]);
-     // check if e-mail address is well-formed
-     }
-      
-      if (empty($_POST["datum"])) {
-     $datumErr = "Datum is required";
-     } else {
-     $datum = test_input($_POST["datum"]);
-     // check if e-mail address is well-formed
-     } 
-     
-       if (isset($_POST['submit'])) {
-         if (empty($_POST["izjava"])) {
-         $izjavaErr = "Izjava is required";
-      } else {
-    $izjava = test_input($_POST["izjava"]);
-    // check if e-mail address is well-formed
-      }
-  }
-}
-    if (isset($_POST['submit'])) {
-            if (isset($_POST["ime"]) && isset($_POST["prezime"])&& isset($_POST["oib"])&& isset($_POST["mobitel"])&& isset($_POST["email"])&& isset($_POST["izvodac_naziv"])&& isset($_POST["studijski_program_naziv"]) && isset($_POST["razina"])&& isset($_POST["datum"])&& isset($_POST["izjava"])) {
-                $ime = test_input($_POST["ime"]);
-                $prezime = test_input($_POST["prezime"]);
-                $oib = test_input($_POST["oib"]);
-                $mobitel = test_input($_POST["mobitel"]);
-                $email = test_input($_POST["email"]);
-                $izvodac_naziv = test_input($_POST["izvodac_naziv"]);
-                $studijski_program_naziv = test_input($_POST["studijski_program_naziv"]);
-                $razina = test_input($_POST["razina"]);
-                $datum = test_input($_POST["datum"]);
-                $izjava = test_input($_POST["izjava"]);
-
-                $user = "root";
-                $pass = "";
-                $dbh = new PDO ('mysql:host=localhost;dbname=spu', $user, $pass);
-                $dbh->setAttribute (PDO:: ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-
-                $sql = "INSERT INTO studenti (ime, prezime, oib, mobitel, email, izvodac_naziv, studijski_program_naziv, razina, datum) VALUES ('$ime', '$prezime', '$oib', '$mobitel', '$email', '$izvodac_naziv', '$studijski_program_naziv', '$razina', '$datum')";
-                $dbh->exec($sql);
-      
-                echo "<h1>Primili smo Vaše podatke! Zahvaljujemo na suradnji.</h1>";
-                echo "<h3>Vaši podaci:</h3>";
-           echo "Ime:" . ' '. $ime;
-           echo "<br>";
-           echo "Prezime:" . ' ' .$prezime;
-           echo "<br>";
-           echo "OIB" . ' ' . $oib;
-           echo "<br>";
-           echo "Email:" . ' ' .$email;
-           echo "<br>";
-           echo "Šifra izvođača:" . ' ' . $izvodac_naziv;
-           echo "<br>";
-           echo "Šifra studijskog programa:" . ' '. $studijski_program_naziv;
-           echo "<br>";
-           echo "Razina obrazovanja: " . ' ' . $razina;
-           echo "<br>";
-           echo "Datum završetka studija: " . ' ' . $datum;
-           echo "<br>";
-           //echo "Izjavljujem da su podaci u tablici točni te da sam suglasan/suglasna da se koriste u navedenu svrhu.";
-            }
-            }  
-          } 
-          catch (PDOException $e) 
-          { print "Error!: " . $e->getMessage() . "<br/>";
-     die();
-   }
-  
-
-    function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-
+    if (strlen($oib) != 11 || !is_numeric($oib)) {
+      return false;
     }
+  
+    $a = 10;
+  
+    for ($i = 0; $i < 10; $i++) {
+  
+      $a += (int)$oib[$i];
+      $a %= 10;
+  
+      if ( $a == 0 ) { $a = 10; }
+  
+      $a *= 2;
+      $a %= 11;
+  
+    }
+  
+    $kontrolni = 11 - $a;
+  
+    if ( $kontrolni == 10 ) { $kontrolni = 0; }
+  
+    return $kontrolni == intval(substr($oib, 10, 1), 10);
+  }
   ?>
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
@@ -277,7 +149,7 @@ $(document).ready(function(){
           <div class="grid-x grid-padding-x">
             <div class="large-6 medium-6 cell">
               <label>OIB <span class="error">* <?php echo $oibErr;?></span></label>
-                <input type="text" name="oib"  class="InputBox" id="oib" required >
+                <input type="text" name="oib"   id="oib" required >
                 
             </div>
           <!-- </div>       -->

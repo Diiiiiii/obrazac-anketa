@@ -36,5 +36,12 @@ body {
   
 }
 
+.alert-success {
+  padding: 20px;
+  background-color: #ddffdd;
+  border-radius: 10px;
+   /* border-left: 6px solid #04AA6D;  */
+  color: black;
+  margin-bottom: 15px;
 
-
+}
