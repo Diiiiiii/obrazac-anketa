@@ -87,7 +87,7 @@ $(document).ready(function(){
 
   include "message.php";
 
-  function CheckOIB($oib) {
+  /* function CheckOIB($oib) {
 
     if (strlen($oib) != 11 || !is_numeric($oib)) {
       return false;
@@ -112,7 +112,7 @@ $(document).ready(function(){
     if ( $kontrolni == 10 ) { $kontrolni = 0; }
   
     return $kontrolni == intval(substr($oib, 10, 1), 10);
-  }
+  } */
   ?>
       <div class="grid-container">
         <div class="grid-x grid-padding-x">
@@ -149,7 +149,7 @@ $(document).ready(function(){
           <div class="grid-x grid-padding-x">
             <div class="large-6 medium-6 cell">
               <label>OIB <span class="error">* <?php echo $oibErr;?></span></label>
-                <input type="text" name="oib"   id="oib" required >
+                <input type="text" name="oib" class="InputBox"  placeholder = "12345678901" id="oib" required >
                 
             </div>
           <!-- </div>       -->
