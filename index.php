@@ -129,7 +129,7 @@ $(document).ready(function(){
           </div>
         </div>
 
-        <form name = "form" method="post" action="modified.php"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
+        <form name = "form" method="post" action="message.php"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
           <div class="grid-x grid-padding-x">
             <div class="large-6 medium-6 cell">
              
